@@ -17,7 +17,7 @@ pequenas unidades espalhadas por várias cidades no país.
 -Nome;  
 -Telefone;  
 -Data de Nascimento;  
--Gênoro.  
+-Gênero.  
 
 - Edição de um cadastro.
 
