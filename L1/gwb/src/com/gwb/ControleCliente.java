@@ -363,7 +363,7 @@ public class ControleCliente {
 		if (cadastro.isEmpty())
 			return 0;
 		else {
-			return Integer.parseInt(cadastro.get(cadastro.size() - 7));
+			return Integer.parseInt(cadastro.get(cadastro.size() - 8));
 		}
 	}
 
