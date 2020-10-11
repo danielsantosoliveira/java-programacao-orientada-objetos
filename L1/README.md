@@ -13,11 +13,11 @@ pequenas unidades espalhadas por várias cidades no país.
 # Solução
 
  Desenvolver uma agenda de clientes para o WB – cada unidade terá sua própria agenda. A agenda deverá ter as seguintes funcionalidades:
-- Cadastro de clientes com as seguintes informações:
--Nome;
--Telefone;
--Data de Nascimento;
--Gênoro.
+- Cadastro de clientes com as seguintes informações:  
+-Nome;  
+-Telefone;  
+-Data de Nascimento;  
+-Gênoro.  
 
 - Edição de um cadastro.
 
@@ -27,9 +27,9 @@ pequenas unidades espalhadas por várias cidades no país.
 
 - Listagem de somente os clientes de um determinado gênero.
 
-- Relatórios básicos com as seguintes informações:
--Qual é a idade média de todo o público de uma unidade.
--Qual é a idade média do público para um determinado gênero.
+- Relatórios básicos com as seguintes informações:    
+-Qual é a idade média de todo o público de uma unidade.  
+-Qual é a idade média do público para um determinado gênero.    
 
 - Capacidade de persistência de dados. A agenda deverá ser salva em um arquivo em disco rígido, como acontece com a maíoria dos softwares existentes em mercado.
 
