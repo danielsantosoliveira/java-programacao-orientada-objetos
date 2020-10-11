@@ -62,7 +62,7 @@ public class ControleCliente {
 			case 1:
 				if (buscarCliente() >= 0) {
 					System.out.println("\nOpção -> Excluir Cliente");
-					for (int i = posicao + 6; i >= posicao; i--) {
+					for (int i = posicao + 7; i >= posicao; i--) {
 						cadastro.remove(i);
 					}
 					System.out.println("\nExclusão realizada com sucesso.");
@@ -219,7 +219,8 @@ public class ControleCliente {
 
 			switch (op) {
 			case 1:
-				System.out.print("\n====== Todos Clientes \nQuantidade Registro(s): " + (cadastro.size() % 8));
+				System.out.println(cadastro.size());
+				System.out.print("\n====== Todos Clientes \nQuantidade Registro(s): " + (cadastro.size() / 8));
 				listarTodosClientes().forEach(txt -> System.out.println(txt));
 				break;
 
@@ -227,14 +228,14 @@ public class ControleCliente {
 				if (listarClientesMasculino().isEmpty()) {
 					System.out.println("Não há cadastro(s) Masculino");
 				} else {
-					System.out.print("\n====== Clientes Masculino \nQuantidade Registro(s): " + (cadastro.size() % 8));
+					System.out.print("\n====== Clientes Masculino \nQuantidade Registro(s): " + (cadastro.size() / 8));
 					listarClientesMasculino().forEach(txt -> System.out.println(txt));
 				}
 				break;
 			case 3:
 				if (listarClientesFeminino().isEmpty()) {
 					System.out
-							.println("Não há cadastro(s) Feminino \nQuantidade Registro(s): " + (cadastro.size() % 8));
+							.println("Não há cadastro(s) Feminino \nQuantidade Registro(s): " + (cadastro.size() / 8));
 				} else {
 					System.out.print("\n====== Clientes Feminino");
 					listarClientesFeminino().forEach(txt -> System.out.println(txt));
@@ -309,12 +310,18 @@ public class ControleCliente {
 	}
 
 	public int buscarCliente() {
-		System.out.print("\nInforme o ID do cliente que deseja editar: ");
-		String id = controle.texto();
-		posicao = cadastro.indexOf(id);
-		if (posicao >= 0)
-			return posicao;
-		return posicao = -1;
+		Integer posicao = -1;
+		if (this.cadastro.isEmpty()) {
+			System.out.println("Não há cadastros para persistir :(");
+		} else {
+			System.out.print("\nInforme o ID do cliente que deseja editar: ");
+			String id = controle.texto();
+			posicao = cadastro.indexOf(id);
+			if (posicao >= 0)
+				this.posicao = posicao;
+			this.posicao = posicao;
+		}
+		return this.posicao;
 	}
 
 	public void persistir() throws IOException {
