@@ -34,3 +34,17 @@ pequenas unidades espalhadas por várias cidades no país.
 - Capacidade de persistência de dados. A agenda deverá ser salva em um arquivo em disco rígido, como acontece com a maíoria dos softwares existentes em mercado.
 
 # Prévia da Solução
+### Cadastrar:
+![Cadastro](https://github.com/danielsantosoliveira/java-programacao-orientada-objetos/blob/master/L1/imagens/cadastro.PNG)
+
+### Editar cadastro:
+![Edição](https://github.com/danielsantosoliveira/java-programacao-orientada-objetos/blob/master/L1/imagens/editar.PNG)
+
+### Listar cadastros:
+![Listagem](https://github.com/danielsantosoliveira/java-programacao-orientada-objetos/blob/master/L1/imagens/listar.PNG)
+
+### Excluir cadastro:
+![Exclusão](https://github.com/danielsantosoliveira/java-programacao-orientada-objetos/blob/master/L1/imagens/excluir.PNG)
+
+### Sair:
+![Sair](https://github.com/danielsantosoliveira/java-programacao-orientada-objetos/blob/master/L1/imagens/sair.PNG)
