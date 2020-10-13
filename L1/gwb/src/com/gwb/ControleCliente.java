@@ -39,7 +39,7 @@ public class ControleCliente {
 		cliente.idade = Utils.calculaIdade(cliente.diaNascimento.toString() + "-" + cliente.mesNascimento.toString()
 				+ "-" + cliente.anoNascimento.toString(), "dd-MM-yyyy");
 		System.out.print("GÊNERO M ou F: ");
-		cliente.genero = controle.texto();
+		cliente.genero = controle.texto().toUpperCase();
 
 		cadastro.add(cliente.id.toString());
 		cadastro.add(cliente.nome);
@@ -49,38 +49,7 @@ public class ControleCliente {
 		cadastro.add(cliente.anoNascimento.toString());
 		cadastro.add(cliente.idade.toString());
 		cadastro.add(cliente.genero);
-	}
-
-	public void excluirCliente() {
-		if (this.cadastro.isEmpty()) {
-			System.out.println("Não há cadastros :(");
-		} else {
-			Menu.menuOpcao();
-			op = controle.inteiro();
-
-			switch (op) {
-			case 1:
-				if (buscarCliente() >= 0) {
-					System.out.println("\nOpção -> Excluir Cliente");
-					for (int i = posicao + 7; i >= posicao; i--) {
-						cadastro.remove(i);
-					}
-					System.out.println("\nExclusão realizada com sucesso.");
-					break;
-				} else {
-					System.out.println("Não foi encontrado ID compatível.");
-					break;
-				}
-
-			case 0:
-				System.out.println("Cancelado.");
-				break;
-
-			default:
-				System.out.println("Opção inválida...");
-				break;
-			}
-		}
+		System.out.println("\nCadastro realizado com sucesso.");
 	}
 
 	public void editarCliente() {
@@ -89,7 +58,7 @@ public class ControleCliente {
 		System.out.println("\nOpção -> Editar Cliente");
 
 		if (this.cadastro.isEmpty()) {
-			System.out.println("Não há cadastros :(");
+			System.out.println("\nNão há cadastros :(");
 		} else {
 
 			Menu.menuEditarCliente();
@@ -120,13 +89,13 @@ public class ControleCliente {
 							+ cliente.mesNascimento.toString() + "-" + cliente.anoNascimento.toString(), "dd-MM-yyyy");
 					cadastro.set(posicao + 6, cliente.idade.toString());
 					System.out.print("GÊNERO M ou F: ");
-					cliente.genero = controle.texto();
+					cliente.genero = controle.texto().toUpperCase();
 					cadastro.set(posicao + 7, cliente.genero);
 
-					System.out.println("Edição realizada com sucesso...");
+					System.out.println("\nEdição realizada com sucesso...");
 					break;
 				} else {
-					System.out.println("Não foi encontrado ID compatível.");
+					System.err.println("\nNão foi encontrado ID compatível.");
 					break;
 				}
 
@@ -137,10 +106,10 @@ public class ControleCliente {
 					cliente.nome = controle.texto();
 					cadastro.set(posicao + 1, cliente.nome);
 
-					System.out.println("Edição realizada com sucesso...");
+					System.out.println("\nEdição realizada com sucesso...");
 					break;
 				} else {
-					System.out.println("Não foi encontrado ID compatível.");
+					System.err.println("\nNão foi encontrado ID compatível.");
 					break;
 				}
 
@@ -151,10 +120,10 @@ public class ControleCliente {
 					cliente.telefone = controle.texto();
 					cadastro.set(posicao + 2, cliente.telefone);
 
-					System.out.println("Edição realizada com sucesso...");
+					System.out.println("\nEdição realizada com sucesso...");
 					break;
 				} else {
-					System.out.println("Não foi encontrado ID compatível.");
+					System.err.println("\nNão foi encontrado ID compatível.");
 					break;
 				}
 
@@ -175,10 +144,10 @@ public class ControleCliente {
 							+ cliente.mesNascimento.toString() + "-" + cliente.anoNascimento.toString(), "dd-MM-yyyy");
 					cadastro.set(posicao + 6, cliente.idade.toString());
 
-					System.out.println("Edição realizada com sucesso...");
+					System.out.println("\nEdição realizada com sucesso...");
 					break;
 				} else {
-					System.out.println("Não foi encontrado ID compatível.");
+					System.err.println("\nNão foi encontrado ID compatível.");
 					break;
 				}
 
@@ -186,25 +155,57 @@ public class ControleCliente {
 				if (buscarCliente() >= 0) {
 					System.out.println("\n===== EDITAR CLIENTE =====");
 					System.out.print("GÊNERO M ou F: ");
-					cliente.genero = controle.texto();
+					cliente.genero = controle.texto().toUpperCase();
 					cadastro.set(posicao + 7, cliente.genero);
 
-					System.out.println("Edição realizada com sucesso...");
+					System.out.println("\nEdição realizada com sucesso...");
 					break;
 				} else {
-					System.out.println("Não foi encontrado ID compatível.");
+					System.err.println("\nNão foi encontrado ID compatível.");
 					break;
 				}
 
 			case 0:
-				System.out.println("Cancelado.");
+				System.out.println("\nCancelado.");
 				break;
 
 			default:
-				System.out.println("Opção inválida...");
+				System.err.println("\nOpção inválida...");
 				break;
 			}
 
+		}
+	}
+
+	public void excluirCliente() {
+		if (this.cadastro.isEmpty()) {
+			System.out.println("\nNão há cadastros :(");
+		} else {
+			System.out.println("\nOpção -> Excluir Cliente\n");
+			Menu.menuOpcao();
+			op = controle.inteiro();
+
+			switch (op) {
+			case 1:
+				if (buscarCliente() >= 0) {
+					for (int i = posicao + 7; i >= posicao; i--) {
+						cadastro.remove(i);
+					}
+					System.out.println("\nExclusão realizada com sucesso.");
+					break;
+				} else {
+					System.err.println("\nNão foi encontrado ID compatível.");
+					break;
+				}
+
+			case 0:
+				System.out.println("\nCancelado.");
+				break;
+
+			default:
+				System.err.println("\nOpção inválida...");
+				break;
+			}
 		}
 	}
 
@@ -212,21 +213,20 @@ public class ControleCliente {
 		System.out.println("\nOpção -> Listar Clientes");
 
 		if (this.cadastro.isEmpty()) {
-			System.out.println("Não há cadastros :(");
+			System.out.println("\nNão há cadastros :(");
 		} else {
 			Menu.menuListarClientes();
 			op = controle.inteiro();
 
 			switch (op) {
 			case 1:
-				System.out.println(cadastro.size());
 				System.out.print("\n====== Todos Clientes \nQuantidade Registro(s): " + (cadastro.size() / 8));
 				listarTodosClientes().forEach(txt -> System.out.println(txt));
 				break;
 
 			case 2:
 				if (listarClientesMasculino().isEmpty()) {
-					System.out.println("Não há cadastro(s) Masculino");
+					System.out.println("\nNão há cadastro(s) Masculino");
 				} else {
 					System.out.print("\n====== Clientes Masculino \nQuantidade Registro(s): " + (cadastro.size() / 8));
 					listarClientesMasculino().forEach(txt -> System.out.println(txt));
@@ -234,18 +234,18 @@ public class ControleCliente {
 				break;
 			case 3:
 				if (listarClientesFeminino().isEmpty()) {
-					System.out
-							.println("Não há cadastro(s) Feminino \nQuantidade Registro(s): " + (cadastro.size() / 8));
+					System.out.println(
+							"\nNão há cadastro(s) Feminino \nQuantidade Registro(s): " + (cadastro.size() / 8));
 				} else {
 					System.out.print("\n====== Clientes Feminino");
 					listarClientesFeminino().forEach(txt -> System.out.println(txt));
 				}
 				break;
 			case 0:
-				System.out.println("Cancelado.");
+				System.out.println("\nCancelado.");
 				break;
 			default:
-				System.out.println("Opção inválida...");
+				System.err.println("\nOpção inválida...");
 				break;
 			}
 		}
@@ -325,14 +325,18 @@ public class ControleCliente {
 	}
 
 	public void persistir() throws IOException {
+		File dir = new File(local + separador + "gwb" + separador + "temp");
+		File arquivo = new File(local + separador + "gwb" + separador + "temp" + separador + "cadastro.ser");
+
 		if (this.cadastro.isEmpty()) {
+			FileOutputStream fOut = new FileOutputStream(arquivo);
+			ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+			oOut.writeObject(cadastro);
+			oOut.close();
 			System.out.println("Não há cadastros para persistir :(");
 		} else {
-			File dir = new File(local + separador + "gwb" + separador + "temp");
 			if (!dir.exists())
 				dir.mkdirs();
-
-			File arquivo = new File(local + separador + "gwb" + separador + "temp" + separador + "cadastro.ser");
 			if (!arquivo.exists())
 				arquivo.createNewFile();
 
