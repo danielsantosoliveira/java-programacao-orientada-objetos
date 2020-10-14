@@ -3,7 +3,7 @@ package com.gwb;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		int op;
+		int op, opSair;
 		
 		Controle controle = new Controle();
 		ControleCliente cCliente = new ControleCliente();
@@ -39,8 +39,8 @@ public class Main {
 				System.out.println("Aplicação será encerrada.");
 				System.out.println("Realizar persistência antes de encerrar o programa?");
 				Menu.menuOpcao();
-				op = controle.inteiro();
-				if (op == 1) cCliente.persistir();			
+				opSair = controle.inteiro();
+				if (opSair == 1) cCliente.persistir();			
 				break;
 			default:
 				System.out.println("Opção não encontrada, a aplicalção será encerrada.");
