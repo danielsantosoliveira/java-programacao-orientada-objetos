@@ -438,7 +438,7 @@ public class ControleCliente {
 
 	public void relatorio() {
 		if (this.cadastro.isEmpty()) {
-			System.out.println("Não há cadastros :(");
+			System.out.print("\nNão há cadastros :(");
 		} else {
 			System.out.println("\n========= RELATÓRIO =========");
 			System.out.println("====== Média de Idade: ======");
