@@ -408,32 +408,34 @@ public class ControleCliente {
 		}
 	}
 
-	public float idadeMediaTodos() {
-		Integer tIdade = 0;
-		for (int i = 0; i < cadastro.size() % 7; i++) {
-			tIdade += Integer.parseInt(cadastro.get((cadastro.size() % 7) * 6));
+	public Double idadeMediaTodos() {
+		Double tIdade = (double) 0, base = (double) (cadastro.size() / 8);
+		for (int i = 0; i < cadastro.size(); ++i) {
+			if (cadastro.get(i).equals("F") || cadastro.get(i).equals("M")) {
+				tIdade += Double.parseDouble(cadastro.get(i - 1));
+			}
 		}
-		return (tIdade / (cadastro.size() % 7));
+		return (Double) (tIdade / base);
 	}
 
-	public float idadeMediaMasculino() {
-		Integer tIdade = 0;
+	public Double idadeMediaMasculino() {
+		Double tIdade = (double) 0, base = (double) (cadastro.size() / 8);
 		for (int i = 0; i < cadastro.size(); i++) {
 			if (cadastro.get(i).equals("M")) {
-				tIdade += Integer.parseInt(cadastro.get(i - 1));
+				tIdade += Double.parseDouble(cadastro.get(i - 1));
 			}
 		}
-		return (tIdade / (cadastro.size() % 7));
+		return (Double) (tIdade / base);
 	}
 
-	public float idadeMediaFeminino() {
-		Integer tIdade = 0;
+	public Double idadeMediaFeminino() {
+		Double tIdade = (double) 0, base = (double) (cadastro.size() / 8);
 		for (int i = 0; i < cadastro.size(); i++) {
 			if (cadastro.get(i).equals("F")) {
-				tIdade += Integer.parseInt(cadastro.get(i - 1));
+				tIdade += Double.parseDouble(cadastro.get(i - 1));
 			}
 		}
-		return (tIdade / (cadastro.size() % 7));
+		return (Double) (tIdade / base);
 	}
 
 	public void relatorio() {
