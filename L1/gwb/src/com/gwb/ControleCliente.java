@@ -14,7 +14,7 @@ import java.util.List;
 public class ControleCliente {
 
 	private Integer op, posicao = null;
-	List<String> cadastro = new ArrayList<>();
+	List<String> cadastro, nomes = new ArrayList<>();
 	List<Clientes> cadastroApoio = new ArrayList<>();
 	String separador = System.getProperty("file.separator"), local = System.getProperty("user.home");
 
@@ -220,22 +220,27 @@ public class ControleCliente {
 
 			switch (op) {
 			case 1:
-				System.out.print("\n====== Todos Clientes \nQuantidade Registro(s): " + (cadastro.size() / 8));
-				listarTodosClientes().forEach(txt -> System.out.println(txt));
+
+				if (listarTodosClientes().isEmpty()) {
+					System.out.println("\nNão há cadastro(s)");
+				} else {
+					System.out.print("\n====== Todos Clientes \nQuantidade Registro(s): " + (cadastroApoio.size()));
+					listarTodosClientes().forEach(txt -> System.out.println(txt));
+				}
 				break;
 
 			case 2:
 				if (listarClientesMasculino().isEmpty()) {
 					System.out.println("\nNão há cadastro(s) Masculino");
 				} else {
-					System.out.print("\n====== Clientes Masculino \nQuantidade Registro(s): " + (cadastro.size() / 8));
+					System.out.print("\n====== Clientes Masculino \nQuantidade Registro(s): " + (cadastroApoio.size()));
 					listarClientesMasculino().forEach(txt -> System.out.println(txt));
 				}
 				break;
 			case 3:
 				if (listarClientesFeminino().isEmpty()) {
 					System.out.println(
-							"\nNão há cadastro(s) Feminino \nQuantidade Registro(s): " + (cadastro.size() / 8));
+							"\nNão há cadastro(s) Feminino \nQuantidade Registro(s): " + (cadastroApoio.size()));
 				} else {
 					System.out.print("\n====== Clientes Feminino");
 					listarClientesFeminino().forEach(txt -> System.out.println(txt));
@@ -253,59 +258,84 @@ public class ControleCliente {
 
 	public List<Clientes> listarTodosClientes() {
 		cadastroApoio = new ArrayList<>();
+		nomes = new ArrayList<>();
+
 		for (int i = 0; i < cadastro.size(); i++) {
-			Clientes cliente = new Clientes();
-			cliente.id = Integer.parseInt(cadastro.get(i));
-			cliente.nome = cadastro.get(i + 1);
-			cliente.telefone = cadastro.get(i + 2);
-			cliente.diaNascimento = Integer.parseInt(cadastro.get(i + 3));
-			cliente.mesNascimento = Integer.parseInt(cadastro.get(i + 4));
-			cliente.anoNascimento = Integer.parseInt(cadastro.get(i + 5));
-			cliente.idade = Integer.parseInt(cadastro.get(i + 6));
-			cliente.genero = cadastro.get(i + 7);
-			cadastroApoio.add(cliente);
+			nomes.add(cadastro.get(i + 1));
 			i += 7;
+		}
+		nomes.sort(null);
+		for (String nome : nomes) {
+			posicao = cadastro.indexOf(nome);
+			Clientes cliente = new Clientes();
+			cliente.id = Integer.parseInt(cadastro.get(posicao - 1));
+			cliente.nome = cadastro.get(posicao);
+			cliente.telefone = cadastro.get(posicao + 1);
+			cliente.diaNascimento = Integer.parseInt(cadastro.get(posicao + 2));
+			cliente.mesNascimento = Integer.parseInt(cadastro.get(posicao + 3));
+			cliente.anoNascimento = Integer.parseInt(cadastro.get(posicao + 4));
+			cliente.idade = Integer.parseInt(cadastro.get(posicao + 5));
+			cliente.genero = cadastro.get(posicao + 6);
+			cadastroApoio.add(cliente);
 		}
 		return cadastroApoio;
 	}
 
 	public List<Clientes> listarClientesMasculino() {
 		cadastroApoio = new ArrayList<>();
-		for (int i = 0; i < cadastro.size(); i++) {
-			if (cadastro.get(i).equals("M")) {
-				Clientes cliente = new Clientes();
+		nomes = new ArrayList<>();
 
-				cliente.id = Integer.parseInt(cadastro.get(i - 7));
-				cliente.nome = cadastro.get(i - 6);
-				cliente.telefone = cadastro.get(i - 5);
-				cliente.diaNascimento = Integer.parseInt(cadastro.get(i - 4));
-				cliente.mesNascimento = Integer.parseInt(cadastro.get(i - 3));
-				cliente.anoNascimento = Integer.parseInt(cadastro.get(i - 2));
-				cliente.idade = Integer.parseInt(cadastro.get(i - 1));
-				cliente.genero = cadastro.get(i);
+		for (int i = 0; i < cadastro.size(); i++) {
+			nomes.add(cadastro.get(i + 1));
+			i += 7;
+		}
+		nomes.sort(null);
+
+		for (String nome : nomes) {
+			if (cadastro.get(cadastro.indexOf(nome) + 6).equals("M")) {
+				posicao = cadastro.indexOf(nome);
+				Clientes cliente = new Clientes();
+				cliente.id = Integer.parseInt(cadastro.get(posicao - 1));
+				cliente.nome = cadastro.get(posicao);
+				cliente.telefone = cadastro.get(posicao + 1);
+				cliente.diaNascimento = Integer.parseInt(cadastro.get(posicao + 2));
+				cliente.mesNascimento = Integer.parseInt(cadastro.get(posicao + 3));
+				cliente.anoNascimento = Integer.parseInt(cadastro.get(posicao + 4));
+				cliente.idade = Integer.parseInt(cadastro.get(posicao + 5));
+				cliente.genero = cadastro.get(posicao + 6);
 				cadastroApoio.add(cliente);
 			}
 		}
+
 		return cadastroApoio;
 	}
 
 	public List<Clientes> listarClientesFeminino() {
 		cadastroApoio = new ArrayList<>();
-		for (int i = 0; i < cadastro.size(); i++) {
-			if (cadastro.get(i).equals("F")) {
-				Clientes cliente = new Clientes();
+		nomes = new ArrayList<>();
 
-				cliente.id = Integer.parseInt(cadastro.get(i - 7));
-				cliente.nome = cadastro.get(i - 6);
-				cliente.telefone = cadastro.get(i - 5);
-				cliente.diaNascimento = Integer.parseInt(cadastro.get(i - 4));
-				cliente.mesNascimento = Integer.parseInt(cadastro.get(i - 3));
-				cliente.anoNascimento = Integer.parseInt(cadastro.get(i - 2));
-				cliente.idade = Integer.parseInt(cadastro.get(i - 1));
-				cliente.genero = cadastro.get(i);
+		for (int i = 0; i < cadastro.size(); i++) {
+			nomes.add(cadastro.get(i + 1));
+			i += 7;
+		}
+		nomes.sort(null);
+
+		for (String nome : nomes) {
+			if (cadastro.get(cadastro.indexOf(nome) + 6).equals("F")) {
+				posicao = cadastro.indexOf(nome);
+				Clientes cliente = new Clientes();
+				cliente.id = Integer.parseInt(cadastro.get(posicao - 1));
+				cliente.nome = cadastro.get(posicao);
+				cliente.telefone = cadastro.get(posicao + 1);
+				cliente.diaNascimento = Integer.parseInt(cadastro.get(posicao + 2));
+				cliente.mesNascimento = Integer.parseInt(cadastro.get(posicao + 3));
+				cliente.anoNascimento = Integer.parseInt(cadastro.get(posicao + 4));
+				cliente.idade = Integer.parseInt(cadastro.get(posicao + 5));
+				cliente.genero = cadastro.get(posicao + 6);
 				cadastroApoio.add(cliente);
 			}
 		}
+
 		return cadastroApoio;
 	}
 
@@ -378,37 +408,39 @@ public class ControleCliente {
 		}
 	}
 
-	public float idadeMediaTodos() {
-		Integer tIdade = 0;
-		for (int i = 0; i < cadastro.size() % 7; i++) {
-			tIdade += Integer.parseInt(cadastro.get((cadastro.size() % 7) * 6));
+	public Double idadeMediaTodos() {
+		Double tIdade = (double) 0, base = (double) (cadastro.size() / 8);
+		for (int i = 0; i < cadastro.size(); ++i) {
+			if (cadastro.get(i).equals("F") || cadastro.get(i).equals("M")) {
+				tIdade += Double.parseDouble(cadastro.get(i - 1));
+			}
 		}
-		return (tIdade / (cadastro.size() % 7));
+		return (Double) (tIdade / base);
 	}
 
-	public float idadeMediaMasculino() {
-		Integer tIdade = 0;
+	public Double idadeMediaMasculino() {
+		Double tIdade = (double) 0, base = (double) (cadastro.size() / 8);
 		for (int i = 0; i < cadastro.size(); i++) {
 			if (cadastro.get(i).equals("M")) {
-				tIdade += Integer.parseInt(cadastro.get(i - 1));
+				tIdade += Double.parseDouble(cadastro.get(i - 1));
 			}
 		}
-		return (tIdade / (cadastro.size() % 7));
+		return (Double) (tIdade / base);
 	}
 
-	public float idadeMediaFeminino() {
-		Integer tIdade = 0;
+	public Double idadeMediaFeminino() {
+		Double tIdade = (double) 0, base = (double) (cadastro.size() / 8);
 		for (int i = 0; i < cadastro.size(); i++) {
 			if (cadastro.get(i).equals("F")) {
-				tIdade += Integer.parseInt(cadastro.get(i - 1));
+				tIdade += Double.parseDouble(cadastro.get(i - 1));
 			}
 		}
-		return (tIdade / (cadastro.size() % 7));
+		return (Double) (tIdade / base);
 	}
 
 	public void relatorio() {
 		if (this.cadastro.isEmpty()) {
-			System.out.println("Não há cadastros :(");
+			System.out.print("\nNão há cadastros :(");
 		} else {
 			System.out.println("\n========= RELATÓRIO =========");
 			System.out.println("====== Média de Idade: ======");
